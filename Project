@@ -1,0 +1,46 @@
+
+# Key: Customer name, value: $ budget
+cust_dict = {
+    "Alice": 50,
+    "John": 12
+}
+
+# Key: Meal name, value: cost of the meal
+menu_dict = {
+    "burger": 8,
+    "pizza": 14,
+    "cake": 5
+}
+
+taxes = 0.8
+
+def welcome(customer, budget):
+    print(f"Welcome to our Resturant! {customer}, Budget : {budget}")
+    print("---------------------------------------------")
+    print("Menu List:")
+    for meal, cost in menu_dict.items():
+        print(meal + ": " + str(cost))
+    print("Taxes: " + str(taxes))
+
+
+
+def calculation(customer, budget):
+    meal = input("What would you like to have ? : ").lower()
+
+    while meal not in menu_dict.keys():
+        print(f"{meal} is not available, try again. ")
+        meal = input("What would you like to have? ")
+
+    meal_price = menu_dict[meal]
+
+    while meal_price + taxes > budget :
+        print(f"Sorry, not enough budget for {meal}")
+        meal = input("What would you like to have? ").lower()
+        meal_price = menu_dict[meal]
+    
+    left_budget = (budget - meal_price) - taxes
+    print (f"Your left budget is {left_budget}, Thank you for choosing us Dear {customer}")
+
+for customer, budget in cust_dict.items():
+    welcome(customer,budget)
+    calculation(customer,budget)
